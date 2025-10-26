@@ -16,11 +16,11 @@ typedef struct
     int se_defendio;
 }personaje_t;
 
-int calcular_energia(int energia, int accion);
-int defender(personaje_t entidad);
-int atacar(personaje_t entidad_1, personaje_t entidad_2);
-int curar(personaje_t entidad);
+int calcular_energia(personaje_t *entidad, int accion);
+int defender(personaje_t *entidad);
+int atacar(personaje_t *entidad_1, personaje_t *entidad_2);
+int curar(personaje_t *entidad);
 
-void imprimir_estado(personaje_t entidad_1, personaje_t entidad_2);
+void imprimir_estado(personaje_t *entidad_1, personaje_t *entidad_2);
 
 #endif

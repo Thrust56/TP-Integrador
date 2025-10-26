@@ -4,23 +4,23 @@
 /*
 
 */
-void decidir_accion(personaje_t entidad, personaje_t oponente)
+void decidir_accion(personaje_t *entidad, personaje_t *oponente)
 {
-    if(entidad.energia < 15)
+    if(entidad->energia < 15)
     {
-        entidad.defensa = defender(entidad);
+        entidad->defensa = defender(entidad);
     }
-    else if(entidad.vida < entidad.vida_total * 0.35)
+    else if(entidad->vida < entidad->vida_total * 0.35)
     {
-        entidad.vida = curar(entidad);
+        entidad->vida = curar(entidad);
     }
     else
     {
-        oponente.vida = atacar(entidad, oponente);
+        oponente->vida = atacar(entidad, oponente);
     }
 }
 
-void logica_turnos(personaje_t entidad_1, personaje_t entidad_2)
+void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2)
 {
     #define TURNO_ENTIDAD_1 1
     #define TURNO_ENTIDAD_2 2
@@ -32,7 +32,7 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2)
 
     int turno = TURNO_ENTIDAD_1;
 
-    while(entidad_1.vida > 0 || entidad_2.vida > 0)
+    while(entidad_1->vida > 0 || entidad_2->vida > 0)
     {
         char buffer[2];
         int desicion = 0;
@@ -40,7 +40,7 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2)
 
         if(turno == TURNO_ENTIDAD_1)
         {
-            printf("Turno de %s\n", entidad_1.nombre);
+            printf("Turno de %s\n", entidad_1->nombre);
             imprimir_estado(entidad_1, entidad_2);
 
             while(validacion == INVALIDO)
@@ -52,17 +52,17 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2)
                 switch (desicion)
                 {
                 case ASCII_a:
-                    entidad_2.vida = atacar(entidad_1, entidad_2);
+                    entidad_2->vida = atacar(entidad_1, entidad_2);
                     validacion = VALIDO;
                     break;
 
                 case ASCII_d:
-                    entidad_1.defensa = defender(entidad_1);
+                    entidad_1->defensa = defender(entidad_1);
                     validacion = VALIDO;
                     break;
                 
                 case ASCII_c:
-                    entidad_1.vida = curar(entidad_1);
+                    entidad_1->vida = curar(entidad_1);
                     validacion = VALIDO;
                     break;
                 
@@ -76,7 +76,7 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2)
 
         else if(turno == TURNO_ENTIDAD_2)
         {
-            printf("Turno de %s\n", entidad_1.nombre);
+            printf("Turno de %s\n", entidad_1->nombre);
             imprimir_estado(entidad_1, entidad_2);
 
             decidir_accion(entidad_2, entidad_1);
