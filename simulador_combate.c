@@ -115,7 +115,7 @@ void imprimir_estado(personaje_t entidad_1, personaje_t entidad_2)
     printf("\n");
 }
 
-void logica_turnos(personaje_t entidad_1, personaje_t entidad_2, int turno)
+void logica_turnos(personaje_t entidad_1, personaje_t entidad_2)
 {
     #define TURNO_ENTIDAD_1 1
     #define TURNO_ENTIDAD_2 2
@@ -166,6 +166,7 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2, int turno)
                     break;
                 }
             }
+            turno = TURNO_ENTIDAD_2;
         }
 
         else if(turno == TURNO_ENTIDAD_2)
@@ -174,6 +175,7 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2, int turno)
             imprimir_estado(entidad_1, entidad_2);
 
             decidir_accion(entidad_2, entidad_1);
+            turno = TURNO_ENTIDAD_1;
         }
     }
 }

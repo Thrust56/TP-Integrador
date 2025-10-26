@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "simulador_combate.h": "c"
+        "simulador_combate.h": "c",
+        "stdio.h": "c"
     }
 }

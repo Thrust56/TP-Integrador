@@ -22,6 +22,6 @@ int atacar(personaje_t entidad_1, personaje_t entidad_2);
 int curar(personaje_t entidad);
 
 void imprimir_estado(personaje_t entidad_1, personaje_t entidad_2);
-void logica_turnos(personaje_t entidad_1, personaje_t entidad_2, int turno);
+void logica_turnos(personaje_t entidad_1, personaje_t entidad_2);
 
 #endif
