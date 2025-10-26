@@ -5,6 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+void decidir_accion(personaje_t entidad, personaje_t oponente);
 
 #endif

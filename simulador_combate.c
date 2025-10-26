@@ -15,18 +15,6 @@ Requisitos:
 ● Validación de entradas y estados de personajes. 
 */
 
-/*
-
-*/
-typedef struct
-{
-    char nombre[20];
-    int vida;
-    int energia;
-    int ataque;
-    int defensa;
-    int se_defendio;
-}personaje_t;
 
 /*
 
@@ -100,7 +88,7 @@ int curar(personaje_t entidad)
 
     entidad.energia = calcular_energia(entidad.energia, CURACION);
 
-    return entidad.vida + 15;
+    return entidad.vida + entidad.vida_total * 0.15;
 }
 
 /*
@@ -185,7 +173,7 @@ void logica_turnos(personaje_t entidad_1, personaje_t entidad_2, int turno)
             printf("Turno de %s\n", entidad_1.nombre);
             imprimir_estado(entidad_1, entidad_2);
 
-            
+            decidir_accion(entidad_2, entidad_1);
         }
     }
 }

@@ -8,6 +8,7 @@
 typedef struct
 {
     char nombre[20];
+    int vida_total;
     int vida;
     int energia;
     int ataque;
