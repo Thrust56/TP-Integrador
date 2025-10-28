@@ -19,64 +19,74 @@ Requisitos:
 /*
 
 */
-int calcular_energia(personaje_t *entidad, int accion)
+void calcular_energia(personaje_t *entidad, int accion)
 {
-    int energia_final = 0;
+    int energia_defensa = entidad->energia + 30;
+    int energia_ataque = entidad->energia - 20;
+    int energia_curacion = entidad->energia - 15;
 
     switch (accion)
     {
     case 0: // Entidad se defiende
-        energia_final = entidad->energia = entidad->energia + 30;
+        if(energia_defensa > entidad->energia_total)
+        {
+            entidad->energia = entidad->energia_total;
+        }
+        else
+        {
+            entidad->energia = energia_defensa;
+        }
         break;
 
     case 1: // Entidad ataca
-        energia_final = entidad->energia = entidad->energia - 20;
+        entidad->energia = energia_ataque;
         break;
 
     case 2: // Entidad se cura
-        energia_final = entidad->energia = entidad->energia - 15;
+        entidad->energia = energia_curacion;
         break;
+
     default:
         break;
     }
-
-    return energia_final;
 }
 
 /*
 
 */
-int defender(personaje_t *entidad)
+void defender(personaje_t *entidad)
 {
     #define DEFENSA 0
-    (entidad->energia) = calcular_energia(entidad->energia, DEFENSA);
-    (entidad->se_defendio) = 1;
-    return entidad->defensa * 2;
+
+    if(entidad->se_defendio == 0)
+    {
+        calcular_energia(entidad, DEFENSA);
+        entidad->se_defendio = 1;
+        entidad->defensa = entidad->defensa * 2;
+    }
 }
 
 /*
 
 */
-int atacar(personaje_t *entidad_1, personaje_t *entidad_2)
+void atacar(personaje_t *entidad_1, personaje_t *entidad_2)
 {
     #define ATAQUE 1
 
-    if(entidad_1->se_defendio == ATAQUE)
+    if(entidad_1->se_defendio == 1)
     {
         entidad_1->defensa = entidad_1->defensa / 2;
         entidad_1->se_defendio = 0;
     }
 
-    entidad_1->energia = calcular_energia(entidad_1->energia, 1);
+    calcular_energia(entidad_1, 1);
     entidad_2->vida = entidad_2->vida - (entidad_1->ataque - (entidad_2->defensa/10));
-
-    return entidad_2->vida;
 }
 
 /*
 
 */
-int curar(personaje_t *entidad)
+void curar(personaje_t *entidad)
 {
     #define CURACION 2
 
@@ -86,9 +96,18 @@ int curar(personaje_t *entidad)
         entidad->se_defendio = 0;
     }
 
-    entidad->energia = calcular_energia(entidad->energia, CURACION);
+    calcular_energia(entidad, CURACION);
+    
+    int curacion = entidad->vida + entidad->vida_total * 0.15;
 
-    return (entidad->vida) + (entidad->vida_total) * 0.15;
+    if(curacion > entidad->vida_total)
+    {
+        entidad->vida = entidad->vida_total;
+    }
+    else
+    {
+        entidad->vida = curacion;
+    }
 }
 
 /*

@@ -10,16 +10,17 @@ typedef struct
     char nombre[20];
     int vida_total;
     int vida;
+    int energia_total;
     int energia;
     int ataque;
     int defensa;
     int se_defendio;
 }personaje_t;
 
-int calcular_energia(personaje_t *entidad, int accion);
-int defender(personaje_t *entidad);
-int atacar(personaje_t *entidad_1, personaje_t *entidad_2);
-int curar(personaje_t *entidad);
+void calcular_energia(personaje_t *entidad, int accion);
+void defender(personaje_t *entidad);
+void atacar(personaje_t *entidad_1, personaje_t *entidad_2);
+void curar(personaje_t *entidad);
 
 void imprimir_estado(personaje_t *entidad_1, personaje_t *entidad_2);
 
