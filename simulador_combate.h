@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define DEFENSA 0
+#define ATAQUE 1
+#define CURACION 2
+
 typedef struct
 {
     char nombre[20];

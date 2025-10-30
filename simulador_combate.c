@@ -16,9 +16,6 @@ Requisitos:
 */
 
 
-/*
-
-*/
 void calcular_energia(personaje_t *entidad, int accion)
 {
     int energia_defensa = entidad->energia + 30;
@@ -51,13 +48,8 @@ void calcular_energia(personaje_t *entidad, int accion)
     }
 }
 
-/*
-
-*/
 void defender(personaje_t *entidad)
 {
-    #define DEFENSA 0
-
     if(entidad->se_defendio == 0)
     {
         calcular_energia(entidad, DEFENSA);
@@ -66,13 +58,8 @@ void defender(personaje_t *entidad)
     }
 }
 
-/*
-
-*/
 void atacar(personaje_t *entidad_1, personaje_t *entidad_2)
 {
-    #define ATAQUE 1
-
     if(entidad_1->se_defendio == 1)
     {
         entidad_1->defensa = entidad_1->defensa / 2;
@@ -83,13 +70,8 @@ void atacar(personaje_t *entidad_1, personaje_t *entidad_2)
     entidad_2->vida = entidad_2->vida - (entidad_1->ataque - (entidad_2->defensa/10));
 }
 
-/*
-
-*/
 void curar(personaje_t *entidad)
 {
-    #define CURACION 2
-
     if(entidad->se_defendio == 1)
     {
         entidad->defensa = entidad->defensa / 2;
@@ -110,9 +92,6 @@ void curar(personaje_t *entidad)
     }
 }
 
-/*
-
-*/
 void imprimir_estado(personaje_t *entidad_1, personaje_t *entidad_2)
 {
     printf("\n");
