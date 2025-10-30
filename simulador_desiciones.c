@@ -102,6 +102,11 @@ void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
         atacar(entidad, oponente);
         imprimir_accion(entidad, oponente, ACCION_ATACAR, log);
     }
+    else
+    {
+        defender(entidad);
+        imprimir_accion(entidad, oponente, ACCION_DEFENDER, log);
+    }
 }
 
 void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
@@ -110,8 +115,7 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 
     while(entidad_1->vida > 0 && entidad_2->vida > 0)
     {
-        char buffer[5];
-        int desicion = 0;
+        char buffer[3];
         int validacion = INVALIDO;
 
         if(turno == TURNO_ENTIDAD_1)
@@ -123,11 +127,10 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
             {
                 printf("Cual sera tu proximo movimiento?\n");
                 printf("Atacar: 'a'  --  Defender: 'd'  --  Curar: 'c'\n");
-                atoi(fgets(buffer, 5, stdin));
-                desicion = buffer[0];
+                fgets(buffer, 3, stdin);
                 //printf("\n----%d----\n", desicion);
 
-                switch (desicion)
+                switch (buffer[0])
                 {
                 case ACCION_ATACAR:
                     if(entidad_1->energia < 20)
