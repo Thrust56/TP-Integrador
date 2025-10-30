@@ -24,7 +24,7 @@ void calcular_energia(personaje_t *entidad, int accion)
 
     switch (accion)
     {
-    case 0: // Entidad se defiende
+    case DEFENSA:
         if(energia_defensa > entidad->energia_total)
         {
             entidad->energia = entidad->energia_total;
@@ -35,11 +35,11 @@ void calcular_energia(personaje_t *entidad, int accion)
         }
         break;
 
-    case 1: // Entidad ataca
+    case ATAQUE:
         entidad->energia = energia_ataque;
         break;
 
-    case 2: // Entidad se cura
+    case CURACION:
         entidad->energia = energia_curacion;
         break;
 
