@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "simulador_combate.h"
 
 #define ACCION_ATACAR 'a'
@@ -11,6 +12,9 @@
 #define ACCION_CURAR 'c'
 #define VICTORIA_1 1
 #define VICTORIA_2 2
+#define INICIO_PARTIDA 3
+#define TIEMPO 4
+
 #define TURNO_ENTIDAD_1 1
 #define TURNO_ENTIDAD_2 2
 #define VALIDO 0

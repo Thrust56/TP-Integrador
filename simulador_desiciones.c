@@ -8,6 +8,8 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
     const char *plantilla_curar = "\n%s se aplico curacion";
     const char *plantilla_victoria1 = "\n%s ha caido en manos de %s!";
     const char *plantilla_victoria2 = "\n%s ha sido asesinado por %s!";
+    const char *plantilla_separador = "-------------------------------\n";
+    const char *plantilla_tiempo = "Fecha de la partida: %Y-%m-%d %H:%M:%S\n";
 
     char *reservar_accion = NULL;
     int tamano_necesario = 0;
@@ -20,10 +22,12 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
             reservar_accion = (char *)malloc(tamano_necesario + 1);
             if(reservar_accion == NULL)
             {
-                //
+                printf("Error al reservar memoria\n");
             }
-
-            sprintf(reservar_accion, plantilla_atacar, entidad->nombre, oponente->nombre);
+            else
+            {
+                sprintf(reservar_accion, plantilla_atacar, entidad->nombre, oponente->nombre);
+            }
             break;
 
         case ACCION_DEFENDER:
@@ -32,10 +36,12 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
             reservar_accion = (char *)malloc(tamano_necesario + 1);
             if(reservar_accion == NULL)
             {
-                //
+                printf("Error al reservar memoria\n");
             }
-            
-            sprintf(reservar_accion, plantilla_defender, entidad->nombre);
+            else
+            {
+                sprintf(reservar_accion, plantilla_defender, entidad->nombre);
+            }
             break;
         
         case ACCION_CURAR:
@@ -44,10 +50,12 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
             reservar_accion = (char *)malloc(tamano_necesario + 1);
             if(reservar_accion == NULL)
             {
-                //
+                printf("Error al reservar memoria\n");
             }
-            
-            sprintf(reservar_accion, plantilla_curar, entidad->nombre);
+            else
+            {
+                sprintf(reservar_accion, plantilla_curar, entidad->nombre);
+            }
             break;
         
         case VICTORIA_1:
@@ -56,10 +64,12 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
             reservar_accion = (char *)malloc(tamano_necesario + 1);
             if(reservar_accion == NULL)
             {
-                //
+                printf("Error al reservar memoria\n");
             }
-            
-            sprintf(reservar_accion, plantilla_victoria1, entidad->nombre, oponente->nombre);
+            else
+            {
+                sprintf(reservar_accion, plantilla_victoria1, entidad->nombre, oponente->nombre);
+            }
             break;
         
         case VICTORIA_2:
@@ -68,10 +78,43 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
             reservar_accion = (char *)malloc(tamano_necesario + 1);
             if(reservar_accion == NULL)
             {
-                //
+                printf("Error al reservar memoria\n");
             }
-            
-            sprintf(reservar_accion, plantilla_victoria2, entidad->nombre, oponente->nombre);
+            else
+            {
+                sprintf(reservar_accion, plantilla_victoria2, entidad->nombre, oponente->nombre);
+            }
+            break;
+        
+        case INICIO_PARTIDA:
+            tamano_necesario = snprintf(NULL, 0, plantilla_separador);
+
+            reservar_accion = (char *)malloc(tamano_necesario + 1);
+            if(reservar_accion == NULL)
+            {
+                printf("Error al reservar memoria\n");
+            }
+            else
+            {
+                sprintf(reservar_accion, plantilla_separador);
+            }
+            break;
+
+        case TIEMPO:
+            tamano_necesario = 100;
+            reservar_accion = (char *)malloc(tamano_necesario);
+
+            if(reservar_accion == NULL)
+            {
+                printf("Error al reservar memoria\n");
+            }
+            else
+            {
+                time_t tiempo = time(NULL);
+                struct tm *tiempo_local = localtime(&tiempo);
+
+                strftime(reservar_accion, tamano_necesario, plantilla_tiempo, tiempo_local);
+            }
             break;
         
         default:
@@ -111,6 +154,15 @@ void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
 
 void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 {
+    int inicio_partida = 0;
+
+    if(inicio_partida == 0)
+    {
+        imprimir_accion(NULL, NULL, TIEMPO, log);
+        imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
+        inicio_partida = 1;
+    }
+
     int turno = TURNO_ENTIDAD_1;
 
     while(entidad_1->vida > 0 && entidad_2->vida > 0)
@@ -185,10 +237,12 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
     if(entidad_2->vida <= 0)
     {
         imprimir_accion(entidad_1, entidad_2, VICTORIA_1, log);
+        imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
     else
     {
         imprimir_accion(entidad_2, entidad_1, VICTORIA_2, log);
+        imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
 
 }
