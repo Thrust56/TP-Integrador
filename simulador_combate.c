@@ -1,19 +1,18 @@
 #include "simulador_combate.h"
 #include "simulador_desiciones.h"
 
-/*
-Objetivo: Combate por turnos entre jugador y enemigo. 
-Requisitos: 
-● Personajes con atributos: vida, energía, ataque, defensa. 
-● Funciones: atacar, defender, curarse. 
-● Enemigo con modo inteligente: decide acción según reglas simples: 
-○ Vida baja → curar 
-○ Energía baja → defender 
-○ Jugador débil → atacar 
-● Registrar historial de turnos. 
-● Modularización: main, combate, decisiones. 
-● Validación de entradas y estados de personajes. 
-*/
+nodo_t *crear_nodo(personaje_t personaje_data)
+{
+    nodo_t *nuevo_nodo = (nodo_t *)malloc(sizeof(nodo_t));
+    if (nuevo_nodo == NULL)
+    {
+        printf("Error: No se pudo crear un nodo para la creacion del personaje\n");
+    }
+    
+    nuevo_nodo->personaje = personaje_data;
+    nuevo_nodo->siguiente = NULL;
+    return nuevo_nodo;
+}
 
 lista_t *crear_lista(void)
 {
@@ -36,42 +35,99 @@ lista_t *lista_personajes(void)
 {
     lista_t *lista = crear_lista();
 
-    nodo_t personaje_6 = {.personaje = PERSONAJE_6, .siguiente = NULL};
-    nodo_t personaje_5 = {.personaje = PERSONAJE_5, .siguiente = &personaje_6};
-    nodo_t personaje_4 = {.personaje = PERSONAJE_4, .siguiente = &personaje_5};
-    nodo_t personaje_3 = {.personaje = PERSONAJE_3, .siguiente = &personaje_4};
-    nodo_t personaje_2 = {.personaje = PERSONAJE_2, .siguiente = &personaje_3};
-    nodo_t personaje_1 = {.personaje = PERSONAJE_1, .siguiente = &personaje_2};
-    lista->inicio = &personaje_1;
+    nodo_t *personaje_1 = crear_nodo(PERSONAJE_1);
+    nodo_t *personaje_2 = crear_nodo(PERSONAJE_2);
+    nodo_t *personaje_3 = crear_nodo(PERSONAJE_3);
+    nodo_t *personaje_4 = crear_nodo(PERSONAJE_4);
+    nodo_t *personaje_5 = crear_nodo(PERSONAJE_5);
+    nodo_t *personaje_6 = crear_nodo(PERSONAJE_6);
+    
+    lista->inicio = personaje_1;
+    personaje_1->siguiente = personaje_2;
+    personaje_2->siguiente = personaje_3;
+    personaje_3->siguiente = personaje_4;
+    personaje_4->siguiente = personaje_5;
+    personaje_5->siguiente = personaje_6;
+
+    lista->capacidad = 6;
 
     return lista;
 }
 
-void elegir_personajes(personaje_t *entidad_1, personaje_t *entidad_2)
+void liberar_lista(lista_t *lista)
 {
-    int eleccion = 0;
-    lista_t *personajes_disponibles = lista_personajes();
-    nodo_t *apuntador = personajes_disponibles->inicio;
-
-    /*while()
+    if (lista != NULL)
     {
-        if()
-        {
-            for(size_t i = 0; i < eleccion; i++)
-            {
-                apuntador = apuntador->siguiente;
-            }
-            *entidad_1 = apuntador->personaje;
+        nodo_t *actual = lista->inicio;
+        nodo_t *siguiente;
+        
+        while (actual != NULL) {
+            siguiente = actual->siguiente;
+            free(actual); // Libera el nodo
+            actual = siguiente;
         }
+        
+        free(lista); // Libera la estructura de la lista
+    }
+}
+
+void elegir_personajes(personaje_t *entidad, int quien_elije)
+{
+    lista_t *personajes_disponibles = lista_personajes();
+    if (personajes_disponibles == NULL)
+    {
+        printf("Error: No se pudo crear la lista de personajes.\n");
+    }
+
+    nodo_t *apuntador = personajes_disponibles->inicio;
+    int cant_personajes = personajes_disponibles->capacidad;
+    
+    int eleccion = 0;
+    char buffer[10];
+    int validacion = INVALIDO;
+
+    while(validacion == INVALIDO)
+    {
+        switch (quien_elije)
+        {
+        case ELIJE_JUGADOR:
+            printf("Que personaje vas a seleccionar?\n");
+            printf("1: Astolfo, 2: Ka'or, 3: Lyra, 4: Grom, 5: Sylas, 6: Vex\n");
+            break;
+        
+        case ELIJE_IA:
+            printf("Contra que personaje vas a combatir?\n");
+            printf("1: Astolfo, 2: Ka'or, 3: Lyra, 4: Grom, 5: Sylas, 6: Vex\n");
+        
+        default:
+            break;
+        }
+
+        fgets(buffer, sizeof(buffer), stdin);
+        eleccion = atoi(buffer);
+
+        if(eleccion > cant_personajes)
+        {
+            printf("Error: Ingrese un personaje valido (1-%d).\n", cant_personajes);
+        }
+
+        else if(eleccion < 1)
+        {
+            printf("Error: No ingrese numeros negativos o 0.\n");
+        }
+
         else
         {
-            for(size_t i = 0; i < eleccion; i++)
+            for(int i = 0; i < eleccion - 1; i++)
             {
                 apuntador = apuntador->siguiente;
             }
-            *entidad_2 = apuntador->personaje;
+            *entidad = apuntador->personaje;
+
+            validacion = VALIDO;
         }
-    }*/
+    }
+    liberar_lista(personajes_disponibles);
 }
 
 void calcular_energia(personaje_t *entidad, int accion)
@@ -171,3 +227,12 @@ void imprimir_estado(personaje_t *entidad_1, personaje_t *entidad_2)
     printf("\n");
 }
 
+void empezar_partida()
+{
+    FILE *log = NULL;
+
+    personaje_t jugador;
+    personaje_t enemigo;
+
+    logica_turnos(&jugador, &enemigo, log);
+}

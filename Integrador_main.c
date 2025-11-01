@@ -4,11 +4,7 @@
 
 int main()
 {
-    FILE *log = NULL;
-    personaje_t jugador = PERSONAJE_1;
-    personaje_t enemigo = PERSONAJE_2;
-    
-    logica_turnos(&jugador, &enemigo, log);
+    empezar_partida();
 
     return 0;
 }

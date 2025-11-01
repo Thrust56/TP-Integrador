@@ -1,0 +1,76 @@
+Fecha de la partida: 2025-11-01 14:08:21
+-------------------------------
+
+Lyra ataco a Sylas
+Sylas ataco a Lyra
+Lyra ataco a Sylas
+Sylas ataco a Lyra
+Lyra ataco a Sylas
+Sylas se aplico curacion
+Lyra se defendio, su defensa aumento el doble por un turno
+Sylas ataco a Lyra
+Lyra ataco a Sylas
+Sylas se aplico curacion
+Lyra ataco a Sylas
+Sylas se defendio, su defensa aumento el doble por un turno
+Lyra se defendio, su defensa aumento el doble por un turno
+Sylas se aplico curacion
+Lyra se aplico curacion
+Sylas se aplico curacion
+Lyra se aplico curacion
+Sylas se defendio, su defensa aumento el doble por un turno
+Lyra se defendio, su defensa aumento el doble por un turno
+Sylas ataco a Lyra
+Lyra ataco a Sylas
+Sylas se aplico curacion
+Lyra se defendio, su defensa aumento el doble por un turno
+Sylas se defendio, su defensa aumento el doble por un turno
+Lyra ataco a Sylas
+Sylas se aplico curacion
+Lyra ataco a Sylas
+Lyra ha caido en manos de Sylas!-------------------------------
+Fecha de la partida: 2025-11-01 14:10:27
+
+-------------------------------
+
+Vex ataco a Grom
+Grom ataco a Vex
+Vex ataco a Grom
+Grom ataco a Vex
+Vex se defendio, su defensa aumento el doble por un turno
+Grom ataco a Vex
+Vex ataco a Grom
+Grom se defendio, su defensa aumento el doble por un turno
+Vex ataco a Grom
+Grom se aplico curacion
+Vex se defendio, su defensa aumento el doble por un turno
+Grom se aplico curacion
+Vex se aplico curacion
+Grom se defendio, su defensa aumento el doble por un turno
+Vex se aplico curacion
+Grom ataco a Vex
+Vex se defendio, su defensa aumento el doble por un turno
+Grom se defendio, su defensa aumento el doble por un turno
+Vex ataco a Grom
+Grom se aplico curacion
+Vex se defendio, su defensa aumento el doble por un turno
+Grom ataco a Vex
+Vex ataco a Grom
+Grom se defendio, su defensa aumento el doble por un turno
+Vex ataco a Grom
+Grom se aplico curacion
+Vex se defendio, su defensa aumento el doble por un turno
+Grom se aplico curacion
+Vex ataco a Grom
+Grom se defendio, su defensa aumento el doble por un turno
+Vex se defendio, su defensa aumento el doble por un turno
+Grom se aplico curacion
+Vex ataco a Grom
+Grom se aplico curacion
+Vex ataco a Grom
+Grom se defendio, su defensa aumento el doble por un turno
+Vex se defendio, su defensa aumento el doble por un turno
+Grom se aplico curacion
+Vex ataco a Grom
+Vex ha caido en manos de Grom!
+-------------------------------
