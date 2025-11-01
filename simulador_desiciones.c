@@ -9,7 +9,7 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
     const char *plantilla_victoria1 = "\n%s ha caido en manos de %s!";
     const char *plantilla_victoria2 = "\n%s ha sido asesinado por %s!";
     const char *plantilla_separador = "\n-------------------------------\n";
-    const char *plantilla_tiempo = "Fecha de la partida: %Y-%m-%d %H:%M:%S\n";
+    const char *plantilla_tiempo = "\n\nFecha de la partida: %Y-%m-%d %H:%M:%S\n";
 
     char *reservar_accion = NULL;
     int tamano_necesario = 0;
@@ -138,7 +138,7 @@ void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
     else if(entidad->vida < entidad->vida_total * 0.35)
     {
         curar(entidad);
-       imprimir_accion(entidad, oponente, ACCION_CURAR, log);
+        imprimir_accion(entidad, oponente, ACCION_CURAR, log);
     }
     else if(entidad->energia >= 20)
     {
@@ -159,9 +159,9 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
     if(inicio_partida == 0)
     {
 
-        elegir_personajes(entidad_1, ELIJE_JUGADOR);
-        elegir_personajes(entidad_2, ELIJE_IA);
-
+        elegir_personajes(entidad_1, ELIGE_JUGADOR);
+        elegir_personajes(entidad_2, ELIGE_IA);
+        
         imprimir_accion(NULL, NULL, TIEMPO, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
         inicio_partida = 1;

@@ -90,14 +90,25 @@ void elegir_personajes(personaje_t *entidad, int quien_elije)
     {
         switch (quien_elije)
         {
-        case ELIJE_JUGADOR:
+        case ELIGE_JUGADOR:
             printf("Que personaje vas a seleccionar?\n");
-            printf("1: Astolfo, 2: Ka'or, 3: Lyra, 4: Grom, 5: Sylas, 6: Vex\n");
+            printf(DESCRIPCION_ASTOLFO);
+            printf(DESCRIPCION_KAOR);
+            printf(DESCRIPCION_LYRA);
+            printf(DESCRIPCION_GROM);
+            printf(DESCRIPCION_SYLAS);
+            printf(DESCRIPCION_VEX);
             break;
         
-        case ELIJE_IA:
+        case ELIGE_IA:
             printf("Contra que personaje vas a combatir?\n");
-            printf("1: Astolfo, 2: Ka'or, 3: Lyra, 4: Grom, 5: Sylas, 6: Vex\n");
+            printf(DESCRIPCION_ASTOLFO);
+            printf(DESCRIPCION_KAOR);
+            printf(DESCRIPCION_LYRA);
+            printf(DESCRIPCION_GROM);
+            printf(DESCRIPCION_SYLAS);
+            printf(DESCRIPCION_VEX);
+            break;
         
         default:
             break;
@@ -108,12 +119,12 @@ void elegir_personajes(personaje_t *entidad, int quien_elije)
 
         if(eleccion > cant_personajes)
         {
-            printf("Error: Ingrese un personaje valido (1-%d).\n", cant_personajes);
+            printf("\nError: Ingrese un personaje valido (1-%d).\n", cant_personajes);
         }
 
         else if(eleccion < 1)
         {
-            printf("Error: No ingrese numeros negativos o 0.\n");
+            printf("\nError: No ingrese caracteres, numeros negativos o 0.\n");
         }
 
         else
@@ -180,7 +191,7 @@ void atacar(personaje_t *entidad_1, personaje_t *entidad_2)
         entidad_1->se_defendio = 0;
     }
 
-    calcular_energia(entidad_1, 1);
+    calcular_energia(entidad_1, ATAQUE);
     entidad_2->vida = entidad_2->vida - (entidad_1->ataque - (entidad_2->defensa/10));
 }
 
