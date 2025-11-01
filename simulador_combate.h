@@ -10,8 +10,8 @@
 #define ATAQUE 1
 #define CURACION 2
 
-#define PERSONAJE_1 (personaje_t){.nombre = "Astolfo", .ataque = 20, .defensa = 25, .energia = 80, .energia_total = 80, .vida_total = 100, .vida = 100}
-#define PERSONAJE_2 (personaje_t){.nombre = "Ka'or", .ataque = 15, .defensa = 20, .energia = 55, .energia_total = 55, .vida_total = 70, .vida = 70}
+#define PERSONAJE_1 (personaje_t){.nombre = "Astolfo", .ataque = 20, .defensa = 25, .energia = 80, .energia_total = 80, .vida_total = 100, .vida = 100, .se_defendio = 0}
+#define PERSONAJE_2 (personaje_t){.nombre = "Ka'or", .ataque = 15, .defensa = 20, .energia = 55, .energia_total = 55, .vida_total = 70, .vida = 70, .se_defendio = 0}
 #define PERSONAJE_3 (personaje_t){.nombre = "Lyra", .ataque = 25, .defensa = 15, .energia = 70, .energia_total = 70, .vida_total = 85, .vida = 85, .se_defendio = 0}
 #define PERSONAJE_4 (personaje_t){.nombre = "Grom", .ataque = 12, .defensa = 35, .energia = 60, .energia_total = 60, .vida_total = 130, .vida = 130, .se_defendio = 0}
 #define PERSONAJE_5 (personaje_t){.nombre = "Sylas", .ataque = 18, .defensa = 18, .energia = 100, .energia_total = 100, .vida_total = 100, .vida = 100, .se_defendio = 0}

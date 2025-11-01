@@ -121,11 +121,14 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
             break;
     }
 
-    printf("%s\n", reservar_accion);
-    registrar_historial(log, reservar_accion);
+    if(reservar_accion != NULL)
+    {
+        printf("%s\n", reservar_accion);
+        registrar_historial(log, reservar_accion);
 
-    free(reservar_accion);
-    reservar_accion = NULL;
+        free(reservar_accion);
+        reservar_accion = NULL;
+    }
 }
 
 void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
@@ -253,8 +256,6 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 
 void registrar_historial(FILE *log, char accion[])
 {
-    log = fopen("log.txt", "a");
-
     if(log == NULL)
     {
         perror("\nError al acceder al log\n");
@@ -265,6 +266,7 @@ void registrar_historial(FILE *log, char accion[])
         {
             perror("\nError al escribir en el log\n");
         }
-        fclose(log);
+
+        fflush(log);
     }
 }

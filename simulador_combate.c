@@ -242,8 +242,17 @@ void empezar_partida()
 {
     FILE *log = NULL;
 
+    log = fopen("log.txt", "a");
+    if(log == NULL)
+    {
+        perror("Error: No se pudo crear el archivo log.txt");
+        return;
+    }
+
     personaje_t jugador;
     personaje_t enemigo;
 
     logica_turnos(&jugador, &enemigo, log);
+
+    fclose(log);
 }
