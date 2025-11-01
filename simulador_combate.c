@@ -15,6 +15,64 @@ Requisitos:
 ● Validación de entradas y estados de personajes. 
 */
 
+lista_t *crear_lista(void)
+{
+    lista_t *lista = NULL;
+    
+    lista = malloc(sizeof(lista_t));
+    
+    if (lista == NULL)
+    {
+        return NULL;
+    }
+    
+    lista->inicio = NULL;
+    lista->capacidad = 0;
+    
+    return lista;
+}
+
+lista_t *lista_personajes(void)
+{
+    lista_t *lista = crear_lista();
+
+    nodo_t personaje_6 = {.personaje = PERSONAJE_6, .siguiente = NULL};
+    nodo_t personaje_5 = {.personaje = PERSONAJE_5, .siguiente = &personaje_6};
+    nodo_t personaje_4 = {.personaje = PERSONAJE_4, .siguiente = &personaje_5};
+    nodo_t personaje_3 = {.personaje = PERSONAJE_3, .siguiente = &personaje_4};
+    nodo_t personaje_2 = {.personaje = PERSONAJE_2, .siguiente = &personaje_3};
+    nodo_t personaje_1 = {.personaje = PERSONAJE_1, .siguiente = &personaje_2};
+    lista->inicio = &personaje_1;
+
+    return lista;
+}
+
+void elegir_personajes(personaje_t *entidad_1, personaje_t *entidad_2)
+{
+    int eleccion = 0;
+    lista_t *personajes_disponibles = lista_personajes();
+    nodo_t *apuntador = personajes_disponibles->inicio;
+
+    /*while()
+    {
+        if()
+        {
+            for(size_t i = 0; i < eleccion; i++)
+            {
+                apuntador = apuntador->siguiente;
+            }
+            *entidad_1 = apuntador->personaje;
+        }
+        else
+        {
+            for(size_t i = 0; i < eleccion; i++)
+            {
+                apuntador = apuntador->siguiente;
+            }
+            *entidad_2 = apuntador->personaje;
+        }
+    }*/
+}
 
 void calcular_energia(personaje_t *entidad, int accion)
 {

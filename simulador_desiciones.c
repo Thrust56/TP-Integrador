@@ -158,6 +158,9 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 
     if(inicio_partida == 0)
     {
+
+        elegir_personajes(entidad_1, entidad_2);
+
         imprimir_accion(NULL, NULL, TIEMPO, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
         inicio_partida = 1;
