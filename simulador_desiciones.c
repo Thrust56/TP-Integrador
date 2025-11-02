@@ -92,15 +92,6 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
     }
 }
 
-/*
-Recibe dos punteros a personaje_t 
-
-@param entidad[in, out]
-
-@param oponente[out]
-
-@param log
-*/
 void decidir_accion(personaje_t *IA, personaje_t *jugador, FILE *log)
 {
     if(IA->energia < 15)
@@ -125,12 +116,6 @@ void decidir_accion(personaje_t *IA, personaje_t *jugador, FILE *log)
     }
 }
 
-/*
-
-@param entidad_1
-@param entidad_2
-@param log
-*/
 void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
 {
     int inicio_partida = 0;
@@ -231,9 +216,16 @@ void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
 }
 
 /*
+Recibe un puntero a FILE el cual tiene abierto un archivo de texto, en el cual
+se escribirá la cadena de texto que contenga accion[].
 
-@param log
-@param accion
+@param log[out] Puntero a FILE que representa el archivo de texto en el que serán registradas las acciones.
+@pre No debe apuntar a NULL ni tampoco a una direccion de memoria no válida.
+@post Se escribirán las acciones realizadas en el archivo de texto.
+
+@param accion[in] Cadena de texto constante que se registrará en el log.
+@pre Debe tener una cadena de texto válida
+
 */
 void registrar_historial(FILE *log, const char accion[])
 {
