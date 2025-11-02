@@ -27,24 +27,65 @@
 #define ELIGE_JUGADOR 0
 #define ELIGE_IA 1
 
+/*
+Representa a un personaje para una simulacion de un videojuego de combate por turnos simple.
+
+La estructura almacena el nombre y los atributos necesarios para que pueda ser
+utilizado en todas las funciones de los archivos simulador_combate y simulador_desiciones.
+
+Invariantes:
+    - Todas las variables menos nombre y se_defendio deben > 0.
+    - vida no puede ser mayor a vida_total.
+    - energia no puede ser mayor a energia_total.
+    - se_defendio debe mantenerse entre los valores 0 y 1.
+*/
 typedef struct
 {
-    char nombre[20];
-    int vida_total;
-    int vida;
-    int energia_total;
-    int energia;
-    int ataque;
-    int defensa;
-    int se_defendio;
+    char nombre[20];    // Nombre del personaje
+    int vida_total;     // Vida total fija
+    int vida;           // Vida actual variable
+    int energia_total;  // Energía total fija
+    int energia;        // Energía actual variable
+    int ataque;         // Ataque total fijo
+    int defensa;        // Defensa total variable
+    int se_defendio;    // Variable para saber si se llamo a la funcion defender()
 }personaje_t;
 
+/*
+Representa un nodo almacenado en una variable tipo lista_t
+
+Esta estructura ontiene un personaje con sus atributos sin 
+inicializar para luego ser asignadas con la funcion crear_nodo().
+Tambien contiene un puntero a nodo_t que será enlazado a otra variable tipo nodo_t.
+
+Miembros:
+    - personaje: Personaje del simulador de combate.
+    - siguiente: Puntero a otra variable nodo_t.
+
+Invariantes:
+    - siguiente debe apuntar a otra variable tipo nodo_t o a NULL.
+*/
 typedef struct nodo
 {   
     personaje_t personaje;
     struct nodo *siguiente;
 }nodo_t;
 
+/*
+Representa una lista de personajes seleccionables para combatir.
+
+Esta estructura almacena un puntero a una variable nodo_t
+y una variable contador de cuantas variables tipo nodo_t estan
+enlazadas contiguamente.
+
+Miembros:
+    - inicio Es un puntero a nodo_t.
+    - capacidad Es el contador de variables nodo_t.
+
+Invariantes:
+    - inicio debe apuntar a otra variable tipo nodo_t o a NULL.
+    - capacidad debe ser >= 0.
+*/
 typedef struct
 {   
     nodo_t *inicio;
