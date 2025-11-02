@@ -20,9 +20,12 @@
 #define VALIDO 0
 #define INVALIDO 1
 
+void imprimir_accion(const personaje_t *entidad, const personaje_t *oponente, const int accion, FILE *log);
+
 void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log);
-void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FILE *log);
+
 void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log);
-void registrar_historial(FILE *log, char accion[]);
+
+void registrar_historial(FILE *log, const char accion[]);
 
 #endif

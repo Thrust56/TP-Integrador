@@ -1,7 +1,19 @@
 #include "simulador_desiciones.h"
 #include "simulador_combate.h"
 
-void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FILE *log)
+/*
+Recibe dos punteros a personaje_t
+
+@param entidad
+
+@param oponente
+
+@param accion
+
+@param log
+
+*/
+void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, const int accion, FILE *log)
 {
     const char *plantilla_atacar = "\n%s ataco a %s";
     const char *plantilla_defender = "\n%s se defendio, su defensa aumento el doble por un turno";
@@ -17,85 +29,49 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
     switch (accion)
     {
         case ACCION_ATACAR:
-            tamano_necesario = snprintf(NULL, 0, plantilla_atacar, entidad->nombre, oponente->nombre);
-
+            tamano_necesario = snprintf(NULL, 0, plantilla_atacar, nombre_entidad, nombre_oponente);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
-                sprintf(reservar_accion, plantilla_atacar, entidad->nombre, oponente->nombre);
+            if(reservar_accion != NULL) {
+                sprintf(reservar_accion, plantilla_atacar, nombre_entidad, nombre_oponente);
             }
             break;
 
         case ACCION_DEFENDER:
-            tamano_necesario = snprintf(NULL, 0, plantilla_defender, entidad->nombre);
-
+            tamano_necesario = snprintf(NULL, 0, plantilla_defender, nombre_entidad);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
-                sprintf(reservar_accion, plantilla_defender, entidad->nombre);
+            if(reservar_accion != NULL) {
+                sprintf(reservar_accion, plantilla_defender, nombre_entidad);
             }
             break;
         
         case ACCION_CURAR:
-            tamano_necesario = snprintf(NULL, 0, plantilla_curar, entidad->nombre);
-
+            tamano_necesario = snprintf(NULL, 0, plantilla_curar, nombre_entidad);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
-                sprintf(reservar_accion, plantilla_curar, entidad->nombre);
+            if(reservar_accion != NULL) {
+                sprintf(reservar_accion, plantilla_curar, nombre_entidad);
             }
             break;
         
         case VICTORIA_1:
-            tamano_necesario = snprintf(NULL, 0, plantilla_victoria1, entidad->nombre, oponente->nombre);
-
+            tamano_necesario = snprintf(NULL, 0, plantilla_victoria1, nombre_entidad, nombre_oponente);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
-                sprintf(reservar_accion, plantilla_victoria1, entidad->nombre, oponente->nombre);
+            if(reservar_accion != NULL) {
+                sprintf(reservar_accion, plantilla_victoria1, nombre_entidad, nombre_oponente);
             }
             break;
         
         case VICTORIA_2:
-            tamano_necesario = snprintf(NULL, 0, plantilla_victoria2, entidad->nombre, oponente->nombre);
-
+            tamano_necesario = snprintf(NULL, 0, plantilla_victoria2, nombre_entidad, nombre_oponente);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
-                sprintf(reservar_accion, plantilla_victoria2, entidad->nombre, oponente->nombre);
+            if(reservar_accion != NULL) {
+                sprintf(reservar_accion, plantilla_victoria2, nombre_entidad, nombre_oponente);
             }
             break;
         
         case INICIO_PARTIDA:
             tamano_necesario = snprintf(NULL, 0, plantilla_separador);
-
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
+            if(reservar_accion != NULL) {
                 sprintf(reservar_accion, plantilla_separador);
             }
             break;
@@ -103,16 +79,9 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
         case TIEMPO:
             tamano_necesario = 100;
             reservar_accion = (char *)malloc(tamano_necesario);
-
-            if(reservar_accion == NULL)
-            {
-                printf("Error al reservar memoria\n");
-            }
-            else
-            {
+            if(reservar_accion != NULL) {
                 time_t tiempo = time(NULL);
                 struct tm *tiempo_local = localtime(&tiempo);
-
                 strftime(reservar_accion, tamano_necesario, plantilla_tiempo, tiempo_local);
             }
             break;
@@ -129,8 +98,18 @@ void imprimir_accion(personaje_t *entidad, personaje_t *oponente, int accion, FI
         free(reservar_accion);
         reservar_accion = NULL;
     }
+    else
+    {
+        printf("Error al generar la accion %d\n", accion);
+    }
 }
 
+/*
+
+@param entidad
+@param oponente
+@param log
+*/
 void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
 {
     if(entidad->energia < 15)
@@ -155,6 +134,12 @@ void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
     }
 }
 
+/*
+
+@param entidad_1
+@param entidad_2
+@param log
+*/
 void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 {
     int inicio_partida = 0;
@@ -254,7 +239,12 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 
 }
 
-void registrar_historial(FILE *log, char accion[])
+/*
+
+@param log
+@param accion
+*/
+void registrar_historial(FILE *log, const char accion[])
 {
     if(log == NULL)
     {
