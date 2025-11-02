@@ -1,18 +1,6 @@
 #include "simulador_desiciones.h"
 #include "simulador_combate.h"
 
-/*
-Recibe dos punteros a personaje_t
-
-@param entidad
-
-@param oponente
-
-@param accion
-
-@param log
-
-*/
 void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, const int accion, FILE *log)
 {
     const char *plantilla_atacar = "\n%s ataco a %s";
@@ -105,32 +93,35 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
 }
 
 /*
+Recibe dos punteros a personaje_t 
 
-@param entidad
-@param oponente
+@param entidad[in, out]
+
+@param oponente[out]
+
 @param log
 */
-void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
+void decidir_accion(personaje_t *IA, personaje_t *jugador, FILE *log)
 {
-    if(entidad->energia < 15)
+    if(IA->energia < 15)
     {
-        defender(entidad);
-        imprimir_accion(entidad->nombre, NULL, ACCION_DEFENDER, log);
+        defender(IA);
+        imprimir_accion(IA->nombre, NULL, ACCION_DEFENDER, log);
     }
-    else if(entidad->vida < entidad->vida_total * 0.35)
+    else if(IA->vida < IA->vida_total * 0.35)
     {
-        curar(entidad);
-        imprimir_accion(entidad->nombre, NULL, ACCION_CURAR, log);
+        curar(IA);
+        imprimir_accion(IA->nombre, NULL, ACCION_CURAR, log);
     }
-    else if(entidad->energia >= 20)
+    else if(IA->energia >= 20)
     {
-        atacar(entidad, oponente);
-        imprimir_accion(entidad->nombre, oponente->nombre, ACCION_ATACAR, log);
+        atacar(IA, jugador);
+        imprimir_accion(IA->nombre, jugador->nombre, ACCION_ATACAR, log);
     }
     else
     {
-        defender(entidad);
-        imprimir_accion(entidad->nombre, NULL, ACCION_DEFENDER, log);
+        defender(IA);
+        imprimir_accion(IA->nombre, NULL, ACCION_DEFENDER, log);
     }
 }
 
@@ -140,32 +131,32 @@ void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
 @param entidad_2
 @param log
 */
-void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
+void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
 {
     int inicio_partida = 0;
 
     if(inicio_partida == 0)
     {
 
-        elegir_personajes(entidad_1, ELIGE_JUGADOR);
-        elegir_personajes(entidad_2, ELIGE_IA);
+        elegir_personajes(jugador, ELIGE_JUGADOR);
+        elegir_personajes(IA, ELIGE_IA);
         
         imprimir_accion(NULL, NULL, TIEMPO, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
         inicio_partida = 1;
     }
 
-    int turno = TURNO_ENTIDAD_1;
+    int turno = TURNO_JUGADOR;
 
-    while(entidad_1->vida > 0 && entidad_2->vida > 0)
+    while(jugador->vida > 0 && IA->vida > 0)
     {
         char buffer[3];
         int validacion = INVALIDO;
 
-        if(turno == TURNO_ENTIDAD_1)
+        if(turno == TURNO_JUGADOR)
         {
-            printf("\nTurno de %s\n", entidad_1->nombre);
-            imprimir_estado(entidad_1, entidad_2);
+            printf("\nTurno de %s\n", jugador->nombre);
+            imprimir_estado(jugador, IA);
 
             while(validacion == INVALIDO)
             {
@@ -177,33 +168,33 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
                 switch (buffer[0])
                 {
                 case ACCION_ATACAR:
-                    if(entidad_1->energia < 20)
+                    if(jugador->energia < 20)
                     {
                         printf("No tienes suficiente energia!\n");
                     }
                     else
                     {
-                        atacar(entidad_1, entidad_2);
-                        imprimir_accion(entidad_1->nombre, entidad_2->nombre, ACCION_ATACAR, log);
+                        atacar(jugador, IA);
+                        imprimir_accion(jugador->nombre, IA->nombre, ACCION_ATACAR, log);
                         validacion = VALIDO;
                     }
                     break;
 
                 case ACCION_DEFENDER:
-                    defender(entidad_1);
-                    imprimir_accion(entidad_1->nombre, NULL, ACCION_DEFENDER, log);
+                    defender(jugador);
+                    imprimir_accion(jugador->nombre, NULL, ACCION_DEFENDER, log);
                     validacion = VALIDO;
                     break;
                 
                 case ACCION_CURAR:
-                    if(entidad_1->energia < 15)
+                    if(jugador->energia < 15)
                     {
                         printf("No tienes suficiente energia!\n");
                     }
                     else
                     {
-                        curar(entidad_1);
-                        imprimir_accion(entidad_1->nombre, NULL, ACCION_CURAR, log);
+                        curar(jugador);
+                        imprimir_accion(jugador->nombre, NULL, ACCION_CURAR, log);
                         validacion = VALIDO;
                     }
                     break;
@@ -213,27 +204,27 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
                     break;
                 }
             }
-            turno = TURNO_ENTIDAD_2;
+            turno = TURNO_IA;
         }
 
-        else if(turno == TURNO_ENTIDAD_2)
+        else if(turno == TURNO_IA)
         {
-            printf("\nTurno de %s\n", entidad_2->nombre);
-            imprimir_estado(entidad_1, entidad_2);
+            printf("\nTurno de %s\n", IA->nombre);
+            imprimir_estado(jugador, IA);
 
-            decidir_accion(entidad_2, entidad_1, log);
-            turno = TURNO_ENTIDAD_1;
+            decidir_accion(IA, jugador, log);
+            turno = TURNO_JUGADOR;
         }
     }
 
-    if(entidad_2->vida <= 0)
+    if(IA->vida <= 0)
     {
-        imprimir_accion(entidad_1->nombre, entidad_2->nombre, VICTORIA_1, log);
+        imprimir_accion(jugador->nombre, IA->nombre, VICTORIA_1, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
     else
     {
-        imprimir_accion(entidad_2->nombre, entidad_1->nombre, VICTORIA_2, log);
+        imprimir_accion(IA->nombre, jugador->nombre, VICTORIA_2, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
 

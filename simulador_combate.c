@@ -221,23 +221,23 @@ void curar(personaje_t *entidad)
     }
 }
 
-void imprimir_estado(const personaje_t *entidad_1, const personaje_t *entidad_2)
+void imprimir_estado(const personaje_t *jugador, const personaje_t *IA)
 {
     printf("\n");
 
-    printf("\t\t--%s--\n", entidad_1->nombre);
-    printf("\tVida: %d\n", entidad_1->vida);
-    printf("\tAtaque: %d\n", entidad_1->ataque);
-    printf("\tDefensa: %d\n", entidad_1->defensa);
-    printf("\tEnergia: %d\n", entidad_1->energia);
+    printf("\t\t--%s--\n", jugador->nombre);
+    printf("\tVida: %d\n", jugador->vida);
+    printf("\tAtaque: %d\n", jugador->ataque);
+    printf("\tDefensa: %d\n", jugador->defensa);
+    printf("\tEnergia: %d\n", jugador->energia);
 
     printf("\n");
 
-    printf("\t\t--%s--\n", entidad_2->nombre);
-    printf("\tVida: %d\n", entidad_2->vida);
-    printf("\tAtaque: %d\n", entidad_2->ataque);
-    printf("\tDefensa: %d\n", entidad_2->defensa);
-    printf("\tEnergia: %d\n", entidad_2->energia);
+    printf("\t\t--%s--\n", IA->nombre);
+    printf("\tVida: %d\n", IA->vida);
+    printf("\tAtaque: %d\n", IA->ataque);
+    printf("\tDefensa: %d\n", IA->defensa);
+    printf("\tEnergia: %d\n", IA->energia);
 
     printf("\n");
 }
@@ -254,9 +254,9 @@ void empezar_partida()
     }
 
     personaje_t jugador;
-    personaje_t enemigo;
+    personaje_t IA;
 
-    logica_turnos(&jugador, &enemigo, log);
+    logica_turnos(&jugador, &IA, log);
 
     fclose(log);
 }

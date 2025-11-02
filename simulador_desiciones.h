@@ -15,16 +15,37 @@
 #define INICIO_PARTIDA 3
 #define TIEMPO 4
 
-#define TURNO_ENTIDAD_1 1
-#define TURNO_ENTIDAD_2 2
+#define TURNO_JUGADOR 1
+#define TURNO_IA 2
 #define VALIDO 0
 #define INVALIDO 1
 
+/*
+Recibe dos punteros a char que contienen la variable->nombre de una estructura personaje_t. 
+Tambien recibe un int que decide que plantilla char se va a usar para imprimirla en consola y
+en el puntero a FILE que se recibe como parametro. Reserva memoria en el Heap segun el largo 
+de los nombres y la plantilla a utilizar, para luego llamar a la funcion registar_accion(), 
+pasarle como parámetro la plantilla completa y el puntero FILE. Luego libera de la memoria 
+la plantilla temporal creada.
+
+@param nombre_entidad[in] Variable char nombre de la estructura personaje_t. Es el personaje del usuario.
+@pre Debe ser un nombre válido y conocido.
+
+@param nombre_oponente[in] Variable char nombre de la estructura personaje_t, Es la IA del programa.
+@pre Debe ser un nombre válido y conocido.
+
+@param accion Entero que determina que plantilla de caracteres se utilizará
+@pre Debe estar dentro de los valores válidos: 1, 2, 3, 4, 'a'(97), 'd'(100), 'c'(99).
+
+@param log[out] Puntero a FILE que representa el archivo de texto en el que será registrada la plantilla dinámica.
+@pre No debe apuntar a NULL ni tampoco a una direccion de memoria no válida.
+@post Se escribirá la plantilla elegida creada dinamicamente
+*/
 void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, const int accion, FILE *log);
 
-void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log);
+void decidir_accion(personaje_t *IA, personaje_t *jugador, FILE *log);
 
-void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log);
+void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log);
 
 void registrar_historial(FILE *log, const char accion[]);
 
