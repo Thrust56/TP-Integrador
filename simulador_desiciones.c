@@ -115,22 +115,22 @@ void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log)
     if(entidad->energia < 15)
     {
         defender(entidad);
-        imprimir_accion(entidad, oponente, ACCION_DEFENDER, log);
+        imprimir_accion(entidad->nombre, NULL, ACCION_DEFENDER, log);
     }
     else if(entidad->vida < entidad->vida_total * 0.35)
     {
         curar(entidad);
-        imprimir_accion(entidad, oponente, ACCION_CURAR, log);
+        imprimir_accion(entidad->nombre, NULL, ACCION_CURAR, log);
     }
     else if(entidad->energia >= 20)
     {
         atacar(entidad, oponente);
-        imprimir_accion(entidad, oponente, ACCION_ATACAR, log);
+        imprimir_accion(entidad->nombre, oponente->nombre, ACCION_ATACAR, log);
     }
     else
     {
         defender(entidad);
-        imprimir_accion(entidad, oponente, ACCION_DEFENDER, log);
+        imprimir_accion(entidad->nombre, NULL, ACCION_DEFENDER, log);
     }
 }
 
@@ -184,14 +184,14 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
                     else
                     {
                         atacar(entidad_1, entidad_2);
-                        imprimir_accion(entidad_1, entidad_2, ACCION_ATACAR, log);
+                        imprimir_accion(entidad_1->nombre, entidad_2->nombre, ACCION_ATACAR, log);
                         validacion = VALIDO;
                     }
                     break;
 
                 case ACCION_DEFENDER:
                     defender(entidad_1);
-                    imprimir_accion(entidad_1, entidad_2, ACCION_DEFENDER, log);
+                    imprimir_accion(entidad_1->nombre, NULL, ACCION_DEFENDER, log);
                     validacion = VALIDO;
                     break;
                 
@@ -203,7 +203,7 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
                     else
                     {
                         curar(entidad_1);
-                        imprimir_accion(entidad_1, entidad_2, ACCION_CURAR, log);
+                        imprimir_accion(entidad_1->nombre, NULL, ACCION_CURAR, log);
                         validacion = VALIDO;
                     }
                     break;
@@ -228,12 +228,12 @@ void logica_turnos(personaje_t *entidad_1, personaje_t *entidad_2, FILE *log)
 
     if(entidad_2->vida <= 0)
     {
-        imprimir_accion(entidad_1, entidad_2, VICTORIA_1, log);
+        imprimir_accion(entidad_1->nombre, entidad_2->nombre, VICTORIA_1, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
     else
     {
-        imprimir_accion(entidad_2, entidad_1, VICTORIA_2, log);
+        imprimir_accion(entidad_2->nombre, entidad_1->nombre, VICTORIA_2, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
 

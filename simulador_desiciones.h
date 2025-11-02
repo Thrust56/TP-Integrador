@@ -20,7 +20,7 @@
 #define VALIDO 0
 #define INVALIDO 1
 
-void imprimir_accion(const personaje_t *entidad, const personaje_t *oponente, const int accion, FILE *log);
+void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, const int accion, FILE *log);
 
 void decidir_accion(personaje_t *entidad, personaje_t *oponente, FILE *log);
 
