@@ -7,18 +7,66 @@
 #include <time.h>
 #include "simulador_combate.h"
 
-#define ACCION_ATACAR 'a'
-#define ACCION_DEFENDER 'd'
-#define ACCION_CURAR 'c'
-#define VICTORIA_1 1
-#define VICTORIA_2 2
-#define INICIO_PARTIDA 3
-#define TIEMPO 4
+/*
+Representa la accion que tomará el usuario o la IA durante el combate.
 
-#define TURNO_JUGADOR 1
-#define TURNO_IA 2
-#define VALIDO 0
-#define INVALIDO 1
+Cada accion será escrita desde la consola como un caracter individual y
+será transformado en un entero por el codigo ASCII.
+
+Valores:
+    - ACCION_ATACAR: Reduce su energia y la vida de su oponente.
+    - ACCION_DEFENDER: Aumenta su defensa y energia.
+    - ACCION_CURAR: Aumenta su vida y reduce su energia.
+*/
+typedef enum
+{
+    ACCION_ATACAR = 'a',
+    ACCION_DEFENDER = 'd',
+    ACCION_CURAR = 'c'
+}accion_t;
+
+/*
+Representa la accion a imprimir en la consola y en el archivo de texto log.txt.
+
+Cada uno de los valores
+*/
+typedef enum
+{
+    VICTORIA_1,     // La IA perdió contra el Usuario.
+    VICTORIA_2,     // El usuario perdió contra la IA.
+    INICIO_PARTIDA, // La partida inició o finalizó.
+    TIEMPO          // Tiempo actual real al momento de inicar la partida.
+}plantilla_t;
+
+/*
+Representa el turno de actuar al momento de la batalla.
+
+De quien sea el turno, podrá elegir 1 de las 3 acciones definidas en accion_t.
+
+Valores:
+    - TURNO_JUGADOR: Le toca al jugador elegir una accion.
+    - TURNO_IA: Le toca a la IA definir su accion.
+*/
+typedef enum
+{
+    TURNO_JUGADOR,
+    TURNO_IA
+}turno_t;
+
+/*
+Representa un estado para una variable de validación.
+
+Mientras la variable sea INVALIDO, se mantendrá en un bucle hasta que sea VALIDO.
+
+Valores:
+    - INVALIDO: La variable no ha sido validada.
+    - VALIDO: La variable fue validada.
+*/
+typedef enum
+{
+    VALIDO,
+    INVALIDO
+}validacion_t;
 
 /*
 Recibe dos punteros a char que contienen la variable->nombre de una estructura personaje_t. 

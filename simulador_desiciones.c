@@ -215,18 +215,6 @@ void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
 
 }
 
-/*
-Recibe un puntero a FILE el cual tiene abierto un archivo de texto, en el cual
-se escribirá la cadena de texto que contenga accion[].
-
-@param log[out] Puntero a FILE que representa el archivo de texto en el que serán registradas las acciones.
-@pre No debe apuntar a NULL ni tampoco a una direccion de memoria no válida.
-@post Se escribirán las acciones realizadas en el archivo de texto.
-
-@param accion[in] Cadena de texto constante que se registrará en el log.
-@pre Debe tener una cadena de texto válida
-
-*/
 void registrar_historial(FILE *log, const char accion[])
 {
     if(log == NULL)

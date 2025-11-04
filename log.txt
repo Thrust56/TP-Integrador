@@ -103,3 +103,90 @@ Ka'or se defendio, su defensa aumento el doble por un turno
 Ka'or ataco a Ka'or
 Ka'or ha caido en manos de Ka'or!
 -------------------------------
+
+
+Fecha de la partida: 2025-11-01 15:17:19
+
+-------------------------------
+
+Vex ataco a Ka'or
+Ka'or ataco a Vex
+Vex ataco a Ka'or
+Ka'or se aplico curacion
+Vex se defendio, su defensa aumento el doble por un turno
+Ka'or se aplico curacion
+Vex ataco a Ka'or
+Ka'or se defendio, su defensa aumento el doble por un turno
+Vex ataco a Ka'or
+Vex ha caido en manos de Ka'or!
+-------------------------------
+
+
+Fecha de la partida: 2025-11-02 15:17:06
+
+-------------------------------
+
+Vex ataco a Ka'or
+Ka'or ataco a Vex
+Vex ataco a Ka'or
+Ka'or se aplico curacion
+Vex se defendio, su defensa aumento el doble por un turno
+Ka'or se aplico curacion
+Vex ataco a Ka'or
+Ka'or se defendio, su defensa aumento el doble por un turno
+Vex ataco a Ka'or
+Vex ha caido en manos de Ka'or!
+-------------------------------
+
+
+Fecha de la partida: 2025-11-02 15:42:14
+
+-------------------------------
+
+Lyra ataco a Ka'or
+Ka'or ataco a Lyra
+Lyra ataco a Ka'or
+Ka'or se aplico curacion
+Lyra ataco a Ka'or
+Ka'or se aplico curacion
+Lyra se defendio, su defensa aumento el doble por un turno
+Ka'or se defendio, su defensa aumento el doble por un turno
+Lyra ataco a Ka'or
+Lyra ha caido en manos de Ka'or!
+-------------------------------
+
+
+Fecha de la partida: 2025-11-02 17:49:48
+
+-------------------------------
+
+Astolfo ataco a Vex
+Vex ataco a Astolfo
+Astolfo ataco a Vex
+Vex ataco a Astolfo
+Astolfo ataco a Vex
+Vex se defendio, su defensa aumento el doble por un turno
+Astolfo ataco a Vex
+Astolfo ha caido en manos de Vex!
+-------------------------------
+
+
+Fecha de la partida: 2025-11-04 13:15:37
+
+-------------------------------
+
+Vex ataco a Astolfo
+Astolfo ataco a Vex
+Vex ataco a Astolfo
+Astolfo ataco a Vex
+Vex se defendio, su defensa aumento el doble por un turno
+Astolfo ataco a Vex
+Vex ataco a Astolfo
+Astolfo se aplico curacion
+Vex ataco a Astolfo
+Astolfo se defendio, su defensa aumento el doble por un turno
+Vex se defendio, su defensa aumento el doble por un turno
+Astolfo se aplico curacion
+Vex ataco a Astolfo
+Vex ha caido en manos de Astolfo!
+-------------------------------

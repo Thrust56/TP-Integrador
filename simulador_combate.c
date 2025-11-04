@@ -152,7 +152,7 @@ void calcular_energia(personaje_t *entidad, const int accion)
 
     switch (accion)
     {
-    case DEFENSA:
+    case ACCION_DEFENDER:
         if(energia_defensa > entidad->energia_total)
         {
             entidad->energia = entidad->energia_total;
@@ -163,11 +163,11 @@ void calcular_energia(personaje_t *entidad, const int accion)
         }
         break;
 
-    case ATAQUE:
+    case ACCION_ATACAR:
         entidad->energia = energia_ataque;
         break;
 
-    case CURACION:
+    case ACCION_CURAR:
         entidad->energia = energia_curacion;
         break;
 
@@ -181,7 +181,7 @@ void defender(personaje_t *entidad)
 {
     if(entidad->se_defendio == 0)
     {
-        calcular_energia(entidad, DEFENSA);
+        calcular_energia(entidad, ACCION_DEFENDER);
         entidad->se_defendio = 1;
         entidad->defensa = entidad->defensa * 2;
     }
@@ -195,7 +195,7 @@ void atacar(personaje_t *entidad_1, personaje_t *entidad_2)
         entidad_1->se_defendio = 0;
     }
 
-    calcular_energia(entidad_1, ATAQUE);
+    calcular_energia(entidad_1, ACCION_ATACAR);
     entidad_2->vida = entidad_2->vida - (entidad_1->ataque - (entidad_2->defensa/10));
 }
 
@@ -207,7 +207,7 @@ void curar(personaje_t *entidad)
         entidad->se_defendio = 0;
     }
 
-    calcular_energia(entidad, CURACION);
+    calcular_energia(entidad, ACCION_CURAR);
     
     int curacion = entidad->vida + entidad->vida_total * 0.15;
 

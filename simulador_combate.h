@@ -6,10 +6,6 @@
 #include <string.h>
 #include <time.h>
 
-#define DEFENSA 0
-#define ATAQUE 1
-#define CURACION 2
-
 #define PERSONAJE_1 (personaje_t){.nombre = "Astolfo", .ataque = 20, .defensa = 25, .energia = 80, .energia_total = 80, .vida_total = 100, .vida = 100, .se_defendio = 0}
 #define PERSONAJE_2 (personaje_t){.nombre = "Ka'or", .ataque = 15, .defensa = 20, .energia = 55, .energia_total = 55, .vida_total = 70, .vida = 70, .se_defendio = 0}
 #define PERSONAJE_3 (personaje_t){.nombre = "Lyra", .ataque = 25, .defensa = 15, .energia = 70, .energia_total = 70, .vida_total = 85, .vida = 85, .se_defendio = 0}
@@ -24,8 +20,21 @@
 #define DESCRIPCION_SYLAS "5 - Sylas: Un 'Balanceado' (All-rounder). Todas sus estadisticas estan en un punto medio (18/18) con buena energia y vida.\n"
 #define DESCRIPCION_VEX "6 - Vex: Un 'Berserker'. El ataque mas alto (30), pero con la defensa (10) y vida (75) mas bajas.\n"
 
-#define ELIGE_JUGADOR 0
-#define ELIGE_IA 1
+/*
+Representa el turno de eleccion entre el Jugador y la IA.
+
+ELIGE_JUGADOR definirá el personaje con el que el usuario combatirá.
+ELIJE_IA definirá el personaje contra el que el usuario combatirá.
+
+Valores:
+    - ELIGE_JUGADOR: Turno de eleccion para el usuario
+    - ELIGE_IA: Turno de eleccion para la IA
+*/
+typedef enum
+{
+    ELIGE_JUGADOR,
+    ELIGE_IA
+}eleccion_t;
 
 /*
 Representa a un personaje para una simulacion de un videojuego de combate por turnos simple.

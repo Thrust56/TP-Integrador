@@ -1,0 +1,95 @@
+[33mcommit 29a434bcb931ccacca851c3118675f9351a4d4f4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sat Nov 1 21:39:07 2025 -0300
+
+    Se documentaron todas las funciones de simulador_combate.c
+
+[33mcommit 1afa1c6f7a101efb765425f299981f22d6161f0a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sat Nov 1 15:10:33 2025 -0300
+
+    Se cambio fopen y fclose a empezar_partida, se agrego un fflush y se inicializo se_defendio en PERSONAJE_1 y PERSONAJE_2
+
+[33mcommit a083528445202090915dee1ca8d5c85080b5a3f0[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sat Nov 1 14:57:22 2025 -0300
+
+    Se terminaron de pulir algunas cosas, se agregaron y defines para mas prolijidad
+
+[33mcommit 8fc50b2d2434faa3847a7cfdce6b68bae67142fc[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sat Nov 1 14:12:40 2025 -0300
+
+    Se modificaron las funciones lista_personajes y elegir_personajes debido a errores fatales y se agregaron las funciones crear_nodo y liberar_lista. Tambien se agrego una funcion empezar_partida
+
+[33mcommit bb99b58a7777b425fc9e8ffb4cd6d29ace3aca4e[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Fri Oct 31 23:33:47 2025 -0300
+
+    Se agregaron las funciones elegir_personajes, lista_personajes y crear_lista. Falta terminar la funcion elegir_personajes e implementarla correctamente en simular_desiciones.c
+
+[33mcommit 3c9fc90b1f9c1d5b94fad69418befa9385d3ffd8[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Fri Oct 31 17:13:31 2025 -0300
+
+    Se agrego <time.h> y se implemenó en el log con las funciones logica_turnos y imprimir_accion
+
+[33mcommit 70ce7b58ba56ae0ddc754a33144c03150a18b43b[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Thu Oct 30 01:47:29 2025 -0300
+
+    ajuste del buffer, eliminacion de la variable desicion y el atoi
+
+[33mcommit 26af86602af0d796fd4352a3153db5b696db4a67[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Thu Oct 30 01:25:55 2025 -0300
+
+    detalle menor
+
+[33mcommit 950cefcde0d432536a748b836bc645c90b230fd1[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Thu Oct 30 01:24:41 2025 -0300
+
+    Se agrego la funcion imprimir_accion, se modificaron todas las funciones de simulador_desiciones para que dependan de imprimir_accion, se agregó la funcion registrar_historial.
+
+[33mcommit b6e7646d9f68b883b42bfbc5f0a37f1d4dff5b77[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Tue Oct 28 18:01:53 2025 -0300
+
+    Se cambiaron todas las fuciones a void con parametros puntero y se agregaron multiples validaciones
+
+[33mcommit ccee7251134117b17b7f9e5918ed0064d909999b[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sun Oct 26 20:36:14 2025 -0300
+
+    Cambio a todas las funciones a puntero
+
+[33mcommit 9ddbc4ab9dcdc2629aa54240269b06c2fb75d5e1[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sun Oct 26 19:56:52 2025 -0300
+
+    Cambio de logica_desiciones a simular_desiciones.c
+
+[33mcommit 77185920254b9c63320662e83bffbc90d5da31f2[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sun Oct 26 19:51:28 2025 -0300
+
+    Implementacion al main
+
+[33mcommit 3c1dbe3beb29e95c2304b650637c68ac1bf77594[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sun Oct 26 19:43:12 2025 -0300
+
+    Simulador de desiciones agregado
+
+[33mcommit 212aff55929762bd5d5e9a4a8907e0c22e0722f5[m
+Author: TomasB <tomasbizz2020@gmail.com>
+Date:   Sun Oct 26 17:44:52 2025 -0300
+
+    Primer commit
+
+[33mcommit 9ad0d9654630cce52c554e666f317007dc0bca10[m
+Author: Tomas Bizzarri <146785266+Thrust56@users.noreply.github.com>
+Date:   Sun Oct 26 17:39:35 2025 -0300
+
+    Initial commit
