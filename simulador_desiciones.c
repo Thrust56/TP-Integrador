@@ -19,7 +19,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case ACCION_ATACAR:
             tamano_necesario = snprintf(NULL, 0, plantilla_atacar, nombre_entidad, nombre_oponente);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 sprintf(reservar_accion, plantilla_atacar, nombre_entidad, nombre_oponente);
             }
             break;
@@ -27,7 +29,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case ACCION_DEFENDER:
             tamano_necesario = snprintf(NULL, 0, plantilla_defender, nombre_entidad);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 sprintf(reservar_accion, plantilla_defender, nombre_entidad);
             }
             break;
@@ -35,7 +39,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case ACCION_CURAR:
             tamano_necesario = snprintf(NULL, 0, plantilla_curar, nombre_entidad);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 sprintf(reservar_accion, plantilla_curar, nombre_entidad);
             }
             break;
@@ -43,7 +49,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case VICTORIA_1:
             tamano_necesario = snprintf(NULL, 0, plantilla_victoria1, nombre_entidad, nombre_oponente);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 sprintf(reservar_accion, plantilla_victoria1, nombre_entidad, nombre_oponente);
             }
             break;
@@ -51,7 +59,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case VICTORIA_2:
             tamano_necesario = snprintf(NULL, 0, plantilla_victoria2, nombre_entidad, nombre_oponente);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 sprintf(reservar_accion, plantilla_victoria2, nombre_entidad, nombre_oponente);
             }
             break;
@@ -59,7 +69,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case INICIO_PARTIDA:
             tamano_necesario = snprintf(NULL, 0, plantilla_separador);
             reservar_accion = (char *)malloc(tamano_necesario + 1);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 sprintf(reservar_accion, plantilla_separador);
             }
             break;
@@ -67,7 +79,9 @@ void imprimir_accion(const char *nombre_entidad, const char *nombre_oponente, co
         case TIEMPO:
             tamano_necesario = 100;
             reservar_accion = (char *)malloc(tamano_necesario);
-            if(reservar_accion != NULL) {
+
+            if(reservar_accion != NULL)
+            {
                 time_t tiempo = time(NULL);
                 struct tm *tiempo_local = localtime(&tiempo);
                 strftime(reservar_accion, tamano_necesario, plantilla_tiempo, tiempo_local);
@@ -99,16 +113,19 @@ void decidir_accion(personaje_t *IA, personaje_t *jugador, FILE *log)
         defender(IA);
         imprimir_accion(IA->nombre, NULL, ACCION_DEFENDER, log);
     }
+
     else if(IA->vida < IA->vida_total * 0.35)
     {
         curar(IA);
         imprimir_accion(IA->nombre, NULL, ACCION_CURAR, log);
     }
+
     else if(IA->energia >= 20)
     {
         atacar(IA, jugador);
         imprimir_accion(IA->nombre, jugador->nombre, ACCION_ATACAR, log);
     }
+
     else
     {
         defender(IA);
@@ -148,7 +165,6 @@ void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
                 printf("Cual sera tu proximo movimiento?\n");
                 printf("Atacar: 'a'  --  Defender: 'd'  --  Curar: 'c'\n");
                 fgets(buffer, 3, stdin);
-                //printf("\n----%d----\n", desicion);
 
                 switch (buffer[0])
                 {
@@ -157,6 +173,7 @@ void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
                     {
                         printf("No tienes suficiente energia!\n");
                     }
+
                     else
                     {
                         atacar(jugador, IA);
@@ -176,6 +193,7 @@ void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
                     {
                         printf("No tienes suficiente energia!\n");
                     }
+
                     else
                     {
                         curar(jugador);
@@ -207,6 +225,7 @@ void logica_turnos(personaje_t *jugador, personaje_t *IA, FILE *log)
         imprimir_accion(jugador->nombre, IA->nombre, VICTORIA_1, log);
         imprimir_accion(NULL, NULL, INICIO_PARTIDA, log);
     }
+
     else
     {
         imprimir_accion(IA->nombre, jugador->nombre, VICTORIA_2, log);
@@ -221,6 +240,7 @@ void registrar_historial(FILE *log, const char accion[])
     {
         perror("\nError al acceder al log\n");
     }
+    
     else
     {
         if(fputs(accion, log) == EOF)

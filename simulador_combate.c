@@ -5,6 +5,7 @@
 nodo_t *crear_nodo(const personaje_t personaje_data)
 {
     nodo_t *nuevo_nodo = (nodo_t *)malloc(sizeof(nodo_t));
+
     if (nuevo_nodo == NULL)
     {
         printf("Error: No se pudo crear un nodo para la creacion del personaje\n");
@@ -18,7 +19,6 @@ nodo_t *crear_nodo(const personaje_t personaje_data)
 lista_t *crear_lista(void)
 {
     lista_t *lista = NULL;
-    
     lista = malloc(sizeof(lista_t));
     
     if (lista == NULL)
@@ -75,6 +75,7 @@ void liberar_lista(lista_t *lista)
 void elegir_personajes(personaje_t *entidad, const int quien_elije)
 {
     lista_t *personajes_disponibles = lista_personajes();
+
     if (personajes_disponibles == NULL)
     {
         printf("Error: No se pudo crear la lista de personajes.\n");
@@ -91,30 +92,30 @@ void elegir_personajes(personaje_t *entidad, const int quien_elije)
     {
         switch (quien_elije)
         {
-        case ELIGE_JUGADOR:
-            printf("Que personaje vas a seleccionar?\n");
-            printf(DESCRIPCION_ASTOLFO);
-            printf(DESCRIPCION_KAOR);
-            printf(DESCRIPCION_LYRA);
-            printf(DESCRIPCION_GROM);
-            printf(DESCRIPCION_SYLAS);
-            printf(DESCRIPCION_VEX);
-            break;
-        
-        case ELIGE_IA:
-            printf("Contra que personaje vas a combatir?\n");
-            printf(DESCRIPCION_ASTOLFO);
-            printf(DESCRIPCION_KAOR);
-            printf(DESCRIPCION_LYRA);
-            printf(DESCRIPCION_GROM);
-            printf(DESCRIPCION_SYLAS);
-            printf(DESCRIPCION_VEX);
-            break;
-        
-        default:
-            printf("Error: valor de variable quien_elije invalido.\n");
-            return;
-            break;
+            case ELIGE_JUGADOR:
+                printf("Que personaje vas a seleccionar?\n");
+                printf(DESCRIPCION_ASTOLFO);
+                printf(DESCRIPCION_KAOR);
+                printf(DESCRIPCION_LYRA);
+                printf(DESCRIPCION_GROM);
+                printf(DESCRIPCION_SYLAS);
+                printf(DESCRIPCION_VEX);
+                break;
+            
+            case ELIGE_IA:
+                printf("Contra que personaje vas a combatir?\n");
+                printf(DESCRIPCION_ASTOLFO);
+                printf(DESCRIPCION_KAOR);
+                printf(DESCRIPCION_LYRA);
+                printf(DESCRIPCION_GROM);
+                printf(DESCRIPCION_SYLAS);
+                printf(DESCRIPCION_VEX);
+                break;
+            
+            default:
+                printf("Error: valor de variable quien_elije invalido.\n");
+                return;
+                break;
         }
 
         fgets(buffer, sizeof(buffer), stdin);
@@ -157,6 +158,7 @@ void calcular_energia(personaje_t *entidad, const int accion)
         {
             entidad->energia = entidad->energia_total;
         }
+
         else
         {
             entidad->energia = energia_defensa;
@@ -215,6 +217,7 @@ void curar(personaje_t *entidad)
     {
         entidad->vida = entidad->vida_total;
     }
+
     else
     {
         entidad->vida = curacion;
@@ -245,8 +248,8 @@ void imprimir_estado(const personaje_t *jugador, const personaje_t *IA)
 void empezar_partida()
 {
     FILE *log = NULL;
-
     log = fopen("log.txt", "a");
+
     if(log == NULL)
     {
         perror("Error: No se pudo crear el archivo log.txt");
